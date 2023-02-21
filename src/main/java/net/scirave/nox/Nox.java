@@ -11,7 +11,7 @@
 
 package net.scirave.nox;
 
-import eu.pb4.polymer.api.block.PolymerBlockUtils;
+import eu.pb4.polymer.core.api.block.PolymerBlockUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.AbstractBlock;
@@ -22,7 +22,8 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.Registries;
 import net.scirave.nox.config.NoxConfig;
 import net.scirave.nox.polymer.blocks.NoxCobwebBlock;
 import net.scirave.nox.polymer.blocks.NoxCobwebBlockEntity;
@@ -44,10 +45,10 @@ public class Nox implements ModInitializer {
     @Override
     public void onInitialize() {
         NoxConfig.init(MOD_ID, NoxConfig.class);
-        TOOLS = Registry.ITEM.stream().filter((item) -> item instanceof ToolItem).toList();
-        ARMOR = Registry.ITEM.stream().filter((item) -> item instanceof ArmorItem).toList();
-        Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "cobweb"), NOX_COBWEB);
-        PolymerBlockUtils.registerBlockEntity(NOX_COBWEB_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE,
+        TOOLS = Registries.ITEM.stream().filter((item) -> item instanceof ToolItem).toList();
+        ARMOR = Registries.ITEM.stream().filter((item) -> item instanceof ArmorItem).toList();
+        Registry.register(Registries.BLOCK, new Identifier(MOD_ID, "cobweb"), NOX_COBWEB);
+        PolymerBlockUtils.registerBlockEntity(NOX_COBWEB_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(MOD_ID, "cobweb_block_entity"),
                 FabricBlockEntityTypeBuilder.create(NoxCobwebBlockEntity::new, NOX_COBWEB).build()));
     }
