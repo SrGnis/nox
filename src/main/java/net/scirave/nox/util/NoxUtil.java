@@ -32,13 +32,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.LocalDifficulty;
 import net.scirave.nox.Nox;
 import net.scirave.nox.config.NoxConfig;
@@ -49,9 +49,9 @@ import java.util.Map;
 
 public class NoxUtil {
 
-    public static final TagKey<Block> NOX_ALWAYS_MINE = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "nox_always_mine"));
-    public static final TagKey<Block> NOX_CANT_MINE = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "nox_cant_mine"));
-    public static final TagKey<Item> FIREPROOF = TagKey.of(Registry.ITEM_KEY, new Identifier("c:fireproof"));
+    public static final TagKey<Block> NOX_ALWAYS_MINE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "nox_always_mine"));
+    public static final TagKey<Block> NOX_CANT_MINE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "nox_cant_mine"));
+    public static final TagKey<Item> FIREPROOF = TagKey.of(RegistryKeys.ITEM, new Identifier("c:fireproof"));
     private final static ItemStack WOOD_PICKAXE = Items.WOODEN_PICKAXE.getDefaultStack();
     private final static ItemStack WOOD_AXE = Items.WOODEN_AXE.getDefaultStack();
     private final static ItemStack WOOD_SHOVEL = Items.WOODEN_SHOVEL.getDefaultStack();

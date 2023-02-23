@@ -55,7 +55,7 @@ public abstract class CreeperIgniteGoalMixin extends Goal {
             this.creeper.setFuseSpeed(-1);
         } else if (d > 16.0D) {
             this.creeper.setFuseSpeed(-1);
-        } else if (!NoxConfig.creepersAttackShields && this.target.isBlocking() && this.target.blockedByShield(EntityDamageSource.explosion(this.creeper))) {
+        } else if (!NoxConfig.creepersAttackShields && this.target.isBlocking() && this.target.blockedByShield((new EntityDamageSource("explosion.player", this.creeper)).setScaledWithDifficulty().setExplosive())) {
             this.creeper.setFuseSpeed(-1);
         } else {
             this.creeper.setFuseSpeed(1);
@@ -65,7 +65,7 @@ public abstract class CreeperIgniteGoalMixin extends Goal {
     @Inject(method = "canStart", at = @At("RETURN"), cancellable = true)
     public void nox$creeperNoTargetShield(CallbackInfoReturnable<Boolean> cir) {
         LivingEntity victim = this.creeper.getTarget();
-        if (!NoxConfig.creepersAttackShields && cir.getReturnValue() && victim != null && victim.isBlocking() && victim.blockedByShield(EntityDamageSource.explosion(this.creeper))) {
+        if (!NoxConfig.creepersAttackShields && cir.getReturnValue() && victim != null && victim.isBlocking() && victim.blockedByShield((new EntityDamageSource("explosion.player", this.creeper)).setScaledWithDifficulty().setExplosive())) {
             this.creeper.setFuseSpeed(-1);
             cir.setReturnValue(false);
         }

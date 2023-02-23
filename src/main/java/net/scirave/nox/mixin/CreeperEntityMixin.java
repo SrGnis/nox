@@ -32,7 +32,7 @@ public abstract class CreeperEntityMixin extends HostileEntityMixin implements N
                 4.0F, 1.2D, 1.5D, (living) -> {
             if (!NoxConfig.creepersRunFromShields) return false;
             if (living instanceof LivingEntity livingEntity) {
-                return livingEntity.isBlocking() && livingEntity.blockedByShield(EntityDamageSource.explosion((CreeperEntity) (Object) this));
+                return livingEntity.isBlocking() && livingEntity.blockedByShield((new EntityDamageSource("explosion.player", (CreeperEntity) (Object) this)).setScaledWithDifficulty().setExplosive());
             }
             return false;
         }));
