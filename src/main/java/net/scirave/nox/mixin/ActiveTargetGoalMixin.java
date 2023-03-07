@@ -25,6 +25,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -60,4 +61,8 @@ public abstract class ActiveTargetGoalMixin extends TrackTargetGoal {
         cir.setReturnValue(this.targetEntity != null);
     }
 
+    @ModifyArg(method = "getSearchBox", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Box;expand(DDD)Lnet/minecraft/util/math/Box;"), index = 1)
+    private double increaseVericalBox(double y) {
+        return y * 2;
+    }
 }

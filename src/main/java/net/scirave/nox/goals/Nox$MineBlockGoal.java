@@ -27,6 +27,7 @@ import net.scirave.nox.util.NoxUtil;
 import org.jetbrains.annotations.Nullable;
 import static net.scirave.nox.util.NoxUtil.NOX_ALWAYS_MINE;
 import static net.scirave.nox.util.NoxUtil.NOX_CANT_MINE;
+import static net.scirave.nox.util.NoxUtil.chatLog;
 
 public class Nox$MineBlockGoal extends Goal {
 
@@ -158,12 +159,17 @@ public class Nox$MineBlockGoal extends Goal {
 
         if (this.owner.age > 60 && (this.owner.isOnGround() || this.owner.isTouchingWater()) && victim.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
 
+            StringBuilder builder = new StringBuilder();
+            builder
+                    .append("Can Start:")
+                    .append(" HDis: ")
+                    .append(owner.getBlockPos().getSquaredDistance(victim.getBlockX(),owner.getBlockY(),victim.getBlockZ()))
+                    .append(" VDis: ")
+                    .append(owner.getBlockPos().getSquaredDistance(owner.getBlockX(),victim.getBlockY(),owner.getBlockZ()))
+            ;
+            chatLog(builder.toString(), owner.world);
             if (this.targetSeen != victim) {
-                if (this.owner.canSee(victim)) {
                     this.targetSeen = victim;
-                } else {
-                    return false;
-                }
             }
 
             Path path = this.owner.getNavigation().findPathTo(victim, 0);
@@ -194,7 +200,7 @@ public class Nox$MineBlockGoal extends Goal {
     @Override
     public boolean shouldContinue() {
         if (this.target != null && this.target.isAlive() && this.owner.isAlive()) {
-            if (this.posToMine != null && this.owner.squaredDistanceTo(this.posToMine.getX(), this.posToMine.getY(), this.posToMine.getZ()) <= 25.0D) {
+            if (this.posToMine != null && this.owner.squaredDistanceTo(this.posToMine.getX(), this.posToMine.getY(), this.posToMine.getZ()) <= 250.0D) {
                 Path path = this.owner.getNavigation().findPathTo(target, 0);
                 return path == null || !path.reachesTarget();
             }

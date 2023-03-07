@@ -31,8 +31,13 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.TextContent;
+import net.minecraft.text.Texts;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
@@ -40,6 +45,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.World;
 import net.scirave.nox.Nox;
 import net.scirave.nox.config.NoxConfig;
 import org.jetbrains.annotations.Nullable;
@@ -322,6 +328,10 @@ public class NoxUtil {
                 }
             }
         }
+    }
+
+    public static void chatLog(String msg, World world){
+        world.getServer().getPlayerManager().broadcast(MutableText.of(new LiteralTextContent(msg)), false);
     }
 
 }
